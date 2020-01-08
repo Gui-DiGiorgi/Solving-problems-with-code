@@ -1,0 +1,41 @@
+# Inspired by https://www.youtube.com/watch?v=3Q_oYDQ2whs
+
+def times(hue):
+    # this turns the busy times into the times of the day they are free
+    hue_plus = []
+    for i in hue:
+        for j in i:
+            hue_plus.append(j)
+    hue_plus.sort()
+    hue_plus_plus = []
+    for i in range((int(len(hue_plus)/2))):
+        hue_plus_plus.append([hue_plus[2*i],hue_plus[2*i+1]])
+    return hue_plus_plus
+
+def clear_times(a,b):
+
+    # format for a and b => [["10:30","11:30"],["13:00","14:30"],["16:00","17:30"],["09:00","18:30"]]
+    # busy times throughout the day (ex: ["10:30","11:30"], that is, busy time from 10:30 to 11:30) and 
+    # their max start and end time for the day for meetings is at the end (ex: ["09:00","18:30"], that is 
+    # the person is free starting at 09:00, but no more meetings past 18:30)
+
+    a_plus = times(a) # see function times
+    b_plus = times(b)
+    
+    # this part see is a start or finish of the first list free time is between or included in any of the the other list free times,
+    # if it is, it compares the start and end times to set where both are free 
+    # and add that to the possible meetings time (time_plus) if it's not there already
+    
+    time_plus = []
+    
+    for i in a_plus:
+        for j in b_plus:
+            member = [max(i[0],j[0]),min(i[1],j[1])]
+            if j[0]<=i[0]<=j[1]:
+                if (max(i[0],j[0]) != min(i[1],j[1])) and member not in time_plus:
+                    time_plus.append([max(i[0],j[0]),min(i[1],j[1])])
+            if j[0]<=i[1]<=j[1]:
+                if max(i[0],j[0]) != min(i[1],j[1]) and member not in time_plus:
+                    time_plus.append([max(i[0],j[0]),min(i[1],j[1])])
+
+    return time_plus

@@ -42,10 +42,10 @@ def file_lister(c_path,ext = None, result = "name", sub = True):
             full_name = r'{0}/{1}'.format(c_path,i)
             if os.path.isfile(full_name):
                 if ext == None:
-                    file_list.append(i)
+                    file_list.append(full_name)
                 else:
                     if i[-len(ext)::1]==ext:
-                        file_list.append(i)
+                        file_list.append(full_name)
                 
     if result == "name":
         return file_list

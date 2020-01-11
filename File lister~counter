@@ -6,7 +6,7 @@ import os
 
 def file_lister(c_path,ext = None, result = "name", sub = True):
 
-    # c_path = r'C:\Users\User\Music'
+    # c_path = r'C:/Users/User/Music'
 
     folders_loc = []
 
@@ -17,14 +17,14 @@ def file_lister(c_path,ext = None, result = "name", sub = True):
     if sub:
 
         for i in os.listdir(c_path):
-            folders_loc.append(r'{0}\{1}'.format(c_path,i))
+            folders_loc.append(r'{0}/{1}'.format(c_path,i))
 
         while len(folders_loc) != 0:
             fake_folders_loc = []
             for i in folders_loc:
                 if os.path.isdir(i):
                     for f in os.listdir(i):
-                        fake_folders_loc.append(r'{0}\{1}'.format(i,f))
+                        fake_folders_loc.append(r'{0}/{1}'.format(i,f))
                 else:
                     if ext == None:
                         file_list.append(i)
@@ -39,7 +39,7 @@ def file_lister(c_path,ext = None, result = "name", sub = True):
     else:
     
         for i in os.listdir(c_path):
-            full_name = r'{0}\{1}'.format(c_path,i)
+            full_name = r'{0}/{1}'.format(c_path,i)
             if os.path.isfile(full_name):
                 if ext == None:
                     file_list.append(i)

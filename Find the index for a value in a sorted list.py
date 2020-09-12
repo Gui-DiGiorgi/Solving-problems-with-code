@@ -1,3 +1,6 @@
+# This function finds the two closest indices for a value in a sorted list. If such value exists in the list, the two
+# numbers are the same, otherwise, it lists where the indices of the closest floor number and closest ceiling number.
+
 def seek_value_index(n,target_list):
     
     tl = target_list
